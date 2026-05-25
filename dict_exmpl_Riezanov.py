@@ -1,4 +1,3 @@
-from itertools import count
 
 space_academy = {
     "academy_name": "Galaxy Horizon Advanced Academy",
