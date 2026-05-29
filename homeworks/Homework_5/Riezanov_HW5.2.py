@@ -1,4 +1,3 @@
-#TestData
 # Given list o tuples (name, surname, age, profession, City location)
 # 1 - Add your new record o the beginning of the given list
 # 2 - In modified list swap elements with indexes 1 and 5 (1<->5). Print result
