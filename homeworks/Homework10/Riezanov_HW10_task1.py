@@ -40,7 +40,7 @@ print(TeamLead.mro())
 
 #тест атрібутів
 assert hasattr(team_lead_1, "name")
-assert hasattr(team_lead_1, "salary")
+assert hasattr(team_lead_1, "salary")`
 assert hasattr(team_lead_1, "department")
 assert hasattr(team_lead_1, "programming_language")
 assert hasattr(team_lead_1, "team_size")
