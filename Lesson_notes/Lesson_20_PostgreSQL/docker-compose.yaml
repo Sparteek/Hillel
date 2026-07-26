@@ -1,0 +1,23 @@
+name: lesson_20
+
+services:
+  postgres_db:
+    image: postgres:15-alpine
+    container_name: postgres_teacher_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: teacher
+      POSTGRES_PASSWORD: super_password
+      POSTGRES_DB: education_platform
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U teacher -d education_platform"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  pgdata:
