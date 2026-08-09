@@ -1,0 +1,48 @@
+First Run
+
+G:\Hillel\.venv\Scripts\python.exe G:\Hillel\homeworks\Homework_21\run_HW_21.py
+Таблиці courses і students готові.
+Додано нових курсів: 5.
+Створено людей: 20. Додано записів у students: 40.
+Студента 'Ваня' додано на курс 'Python'.
+Студента 'Коля' додано на курс 'SQL'.
+Студенти курсу Python: 7
+OrmStudent(id=3, name='Миколай Скорик', age=32, course_id=2)
+OrmStudent(id=4, name='Омелян Дутка', age=27, course_id=2)
+OrmStudent(id=17, name='Тимофій Бабій', age=28, course_id=2)
+OrmStudent(id=23, name='Руслан Бараник', age=18, course_id=2)
+OrmStudent(id=29, name='Ірена Онищенко', age=30, course_id=2)
+OrmStudent(id=36, name='Антон Черінько', age=22, course_id=2)
+OrmStudent(id=41, name='Ваня', age=25, course_id=2)
+Курси Колі: 1
+OrmCourse(id=4, name='SQL')
+
+Вік студента 'Коля' оновлено до 26.
+
+Студента 'Тестовий студент' додано на курс 'QA Manual'.
+Студента 'Тестовий студент' видалено. Видалено рядків: 1.
+
+
+Second Run
+
+G:\Hillel\.venv\Scripts\python.exe G:\Hillel\homeworks\Homework_21\run_HW_21.py
+Таблиці courses і students готові.
+Додано нових курсів: 0.
+Студентів не створено: таблиця students уже має записи.
+'Ваня' уже зареєстрований на курс 'Python'.
+'Коля' уже зареєстрований на курс 'SQL'.
+Студенти курсу Python: 7
+OrmStudent(id=3, name='Миколай Скорик', age=32, course_id=2)
+OrmStudent(id=4, name='Омелян Дутка', age=27, course_id=2)
+OrmStudent(id=17, name='Тимофій Бабій', age=28, course_id=2)
+OrmStudent(id=23, name='Руслан Бараник', age=18, course_id=2)
+OrmStudent(id=29, name='Ірена Онищенко', age=30, course_id=2)
+OrmStudent(id=36, name='Антон Черінько', age=22, course_id=2)
+OrmStudent(id=41, name='Ваня', age=25, course_id=2)
+Курси Колі: 1
+OrmCourse(id=4, name='SQL')
+
+Вік студента 'Коля' оновлено до 26.
+
+Студента 'Тестовий студент' додано на курс 'QA Manual'.
+Студента 'Тестовий студент' видалено. Видалено рядків: 1.
