@@ -1,15 +1,18 @@
+import allure
 import pytest
 
 from database import create_table, delete_result, insert_result, wait_for_database
 
 
 @pytest.fixture(scope="session", autouse=True)
+@allure.title("Підготувати таблицю test_results")
 def prepare_database():
     wait_for_database()
     create_table()
 
 
 @pytest.fixture
+@allure.title("Створити тестовий запис")
 def saved_result():
     result_id = insert_result("docker database test", "created")
     yield result_id
