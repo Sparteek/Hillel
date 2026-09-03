@@ -1,0 +1,75 @@
+pipeline {
+    agent any
+
+    parameters {
+        booleanParam(
+            name: 'SEND_EMAIL',
+            defaultValue: true,
+            description: 'Send the build result to the configured email recipient.'
+        )
+    }
+
+    triggers {
+        // Локальний Jenkins перевіряє GitHub раз на дві хвилини.
+        pollSCM('H/2 * * * *')
+    }
+
+    environment {
+        REPORT_EMAIL = 'armanioo14@gmail.com'
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                // Jenkins бере код та Jenkinsfile з гілки, вказаної у налаштуваннях job.
+                checkout scm
+            }
+        }
+
+        stage('Install dependencies') {
+            steps {
+                dir('homeworks/Homework_29') {
+                    sh '''
+                        python3 -m venv .venv
+                        . .venv/bin/activate
+                        python -m pip install --upgrade pip
+                        python -m pip install -r requirements.txt
+                    '''
+                }
+            }
+        }
+
+        stage('Run autotests') {
+            steps {
+                dir('homeworks/Homework_29') {
+                    sh '''
+                        . .venv/bin/activate
+                        # У корені репозиторію є pytest.ini для Playwright.
+                        # DB-тести не потребують --browser, тому ігноруємо глобальний конфіг.
+                        pytest -c /dev/null -v --alluredir=allure-results --junitxml=test-results.xml
+                    '''
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            dir('homeworks/Homework_29') {
+                junit allowEmptyResults: true, testResults: 'test-results.xml'
+                allure commandline: 'allure-2', includeProperties: false, jdk: '', results: [[path: 'allure-results']]
+            }
+            script {
+                if (params.SEND_EMAIL) {
+                    emailext(
+                        to: env.REPORT_EMAIL,
+                        subject: "Jenkins: ${currentBuild.fullDisplayName} — ${currentBuild.currentResult}",
+                        body: "Pipeline result: ${currentBuild.currentResult}. Build: ${env.BUILD_URL}"
+                    )
+                } else {
+                    echo 'Email disabled until SMTP is configured in Jenkins.'
+                }
+            }
+        }
+    }
+}
