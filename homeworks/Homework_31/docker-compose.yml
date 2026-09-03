@@ -1,0 +1,47 @@
+services:
+  jenkins:
+    build: .
+    container_name: hw31_jenkins
+    user: root
+    ports:
+      - "8081:8080"
+      - "50000:50000"
+    environment:
+      JENKINS_JAVA_OPTIONS: "-Xms256m -Xmx1024m -XX:+UseG1GC"
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: "5432"
+      POSTGRES_DB: homework29
+      POSTGRES_USER: hw29_user
+      POSTGRES_PASSWORD: hw29_password
+      REPORT_EMAIL: armanioo14@gmail.com
+    volumes:
+      - hw31_jenkins_home:/var/jenkins_home
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - hw31_network
+
+  postgres:
+    image: postgres:15-alpine
+    container_name: hw31_postgres
+    environment:
+      POSTGRES_DB: homework29
+      POSTGRES_USER: hw29_user
+      POSTGRES_PASSWORD: hw29_password
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U hw29_user -d homework29"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    volumes:
+      - hw31_postgres_data:/var/lib/postgresql/data
+    networks:
+      - hw31_network
+
+volumes:
+  hw31_jenkins_home:
+  hw31_postgres_data:
+
+networks:
+  hw31_network:
